@@ -1,4 +1,4 @@
-package com.kwitterbackend.auth_service;
+package com.kwitterbackend.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class AuthServiceApplication {
+public class CommonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthServiceApplication.class, args);
+        SpringApplication.run(CommonApplication.class, args);
     }
 
 }
