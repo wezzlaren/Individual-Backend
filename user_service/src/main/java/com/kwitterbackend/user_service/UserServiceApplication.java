@@ -1,4 +1,4 @@
-package com.kwitterbackend.auth_service;
+package com.kwitterbackend.user_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication
 @EnableEurekaClient
-public class AuthServiceApplication {
+@SpringBootApplication
+public class UserServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthServiceApplication.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
     }
 
     @Configuration
