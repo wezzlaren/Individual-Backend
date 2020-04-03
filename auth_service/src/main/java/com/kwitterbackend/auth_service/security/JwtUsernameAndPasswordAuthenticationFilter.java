@@ -45,7 +45,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             throws AuthenticationException {
 
         try {
-
+            System.out.println("Attempting auth");
             // 1. Get credentials from request
             UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
 
@@ -66,7 +66,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-
+        System.out.println("Successful auth");
         Long now = System.currentTimeMillis();
         String token = Jwts.builder()
                 .setSubject(auth.getName())

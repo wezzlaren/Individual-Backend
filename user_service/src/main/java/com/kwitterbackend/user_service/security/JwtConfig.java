@@ -3,7 +3,7 @@ package com.kwitterbackend.user_service.security;
 import org.springframework.beans.factory.annotation.Value;
 
 public class JwtConfig {
-    @Value("${security.jwt.uri:/login/**}")
+    @Value("${security.jwt.uri:/auth/**}")
     private String Uri;
 
     @Value("${security.jwt.header:Authorization}")
