@@ -1,6 +1,6 @@
 package com.kwitterbackend.auth_service.security;
 
-import com.kwitterbackend.common.security.JwtConfig;
+import com.kwitterbackend.user_service.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -57,9 +57,7 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JwtConfig jwtConfig() {
-        return new JwtConfig();
-    }
+    public JwtConfig jwtConfig() {return new JwtConfig();}
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

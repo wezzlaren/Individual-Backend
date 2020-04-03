@@ -1,7 +1,7 @@
 package com.kwitterbackend.user_service.security;
 
 import com.kwitterbackend.user_service.model.CustomGrantedAuthority;
-import org.assertj.core.util.Sets;
+import com.google.common.collect.Sets;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,7 +10,6 @@ import static com.kwitterbackend.user_service.security.UserPermissions.USER_READ
 import static com.kwitterbackend.user_service.security.UserPermissions.USER_WRITE;
 
 public enum UserRole {
-    // ADD all the user roles you want, and bind them to the permissions you defined.
 
     USER(Sets.newHashSet(USER_READ)),
     ADMIN(Sets.newHashSet(USER_READ, USER_WRITE));
