@@ -52,13 +52,13 @@ public class UserController {
         }
     }
 
-//    @PreAuthorize("isAuthenticated()")
-//    @RequestMapping(value = RestURIConstant.currentUser, method = RequestMethod.GET)
-//    public @ResponseBody
-//    User current() {
-//        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        final String email = (String) auth.getPrincipal();
-//        return userRepository.findUserByCustomerCode(email);
-//    }
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = RestURIConstant.currentUser, method = RequestMethod.GET)
+    public @ResponseBody
+    User current() {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        final String username = (String) auth.getPrincipal();
+        return userRepository.findByUsername(username);
+    }
 
 }
