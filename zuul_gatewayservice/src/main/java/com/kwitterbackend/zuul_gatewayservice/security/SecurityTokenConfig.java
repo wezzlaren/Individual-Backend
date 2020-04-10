@@ -1,6 +1,6 @@
 package com.kwitterbackend.zuul_gatewayservice.security;
 
-import com.kwitterbackend.common.security.JwtConfig;
+import com.kwitterbackend.user_service.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -33,8 +33,12 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // allow all who are accessing "auth" service
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
-                // must be an admin if trying to access admin area (authentication is also required here)
-                .antMatchers("/gallery" + "/admin/**").hasRole("ADMIN")
+                // Accessible pages by anonymous users
+                .antMatchers(HttpMethod.POST, "/user/UserController/register").permitAll()
+                // Admin access pages
+                //TODO: change admin access pages
+                .antMatchers("/user/UserController/all").hasRole("ADMIN")
+                .antMatchers("/post" + "/admin/**").hasRole("ADMIN")
                 // Any other request must be authenticated
                 .anyRequest().authenticated();
     }

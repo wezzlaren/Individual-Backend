@@ -1,6 +1,6 @@
 package com.kwitterbackend.zuul_gatewayservice.security;
 
-import com.kwitterbackend.common.security.JwtConfig;
+import com.kwitterbackend.user_service.security.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -63,6 +63,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                 // UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated / being authenticated user.
                 // It needs a list of authorities, which has type of GrantedAuthority interface, where SimpleGrantedAuthority is an implementation of that interface
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                        //TODO: maybe change to CustomGrantedAuthority class if this doesnt work
                         username, null, authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
 
                 // 6. Authenticate the user

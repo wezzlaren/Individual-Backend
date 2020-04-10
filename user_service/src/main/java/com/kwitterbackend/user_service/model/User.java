@@ -21,6 +21,15 @@ public class User implements UserDetails, Serializable {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
     @Column
     private  boolean isAccountNonExpired;
     @Column
@@ -30,15 +39,19 @@ public class User implements UserDetails, Serializable {
     @Column
     private  boolean isCredentialsNonExpired;
 
-    public User(String username, String password, boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked, boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities) {
+    public User(String username, String password, String email, String firstName, String lastName, boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked, boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities) {
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isEnabled = isEnabled;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.authorities = customGrantedAuthorities;
     }
+
 
     public User() {
     }
@@ -60,6 +73,7 @@ public class User implements UserDetails, Serializable {
         this.id = id;
     }
 
+
     @Override
     public String getUsername() {
         return username;
@@ -78,6 +92,29 @@ public class User implements UserDetails, Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public void setAccountNonExpired(boolean accountNonExpired) {
         isAccountNonExpired = accountNonExpired;

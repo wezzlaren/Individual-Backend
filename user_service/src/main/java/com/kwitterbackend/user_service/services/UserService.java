@@ -1,9 +1,13 @@
 package com.kwitterbackend.user_service.services;
 
+import com.kwitterbackend.user_service.AuthUtil;
+import com.kwitterbackend.user_service.dto.RegisterDTO;
 import com.kwitterbackend.user_service.model.User;
 import com.kwitterbackend.user_service.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import static com.kwitterbackend.user_service.security.UserRole.USER;
 
 @Service
 public class UserService {
@@ -24,6 +28,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public String registerUser(RegisterDTO user){
+
+        User newUser = new User(user.getUsername(),new AuthUtil().encode(user.getPassword()),user.getEmail(),user.getFirstName(),user.getLastName(),
+                true,true,true,true, USER.getGrantedAuthorities());
+        userRepository.save(newUser);
+        return "User registered";
+    }
 
 
 }

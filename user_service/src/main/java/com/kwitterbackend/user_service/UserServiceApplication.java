@@ -42,9 +42,9 @@ public class UserServiceApplication {
     public CommandLineRunner demo(UserRepository userRepository, AuthUtil auth){
         return args -> {
 
-            User user1 = new User("wezzlaren",auth.encode("test1"),
+            User user1 = new User("wezzlaren",auth.encode("test1"),"wezzlaren@hotmail.com","Wezz","Laren",
                     true,true,true,true, USER.getGrantedAuthorities());
-            User user2 = new User("admin",auth.encode("test5"),
+            User user2 = new User("admin",auth.encode("test5"),"admin@kwitter.com","Admin","Kwitter",
                     true,true,true,true, ADMIN.getGrantedAuthorities());
             user1 = userRepository.save(user1);
             user2 = userRepository.save(user2);
@@ -56,9 +56,8 @@ public class UserServiceApplication {
     @Configuration
     class RestTemplateConfig {
 
-        // Create a bean for restTemplate to call services
         @Bean
-        @LoadBalanced        // Load balance between service instances running at different ports.
+        @LoadBalanced
         public RestTemplate restTemplate() {
             return new RestTemplate();
         }
