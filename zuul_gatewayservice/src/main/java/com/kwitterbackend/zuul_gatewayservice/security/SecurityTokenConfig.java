@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtConfig jwtConfig;
-
+    //TODO: Fix dependencies
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

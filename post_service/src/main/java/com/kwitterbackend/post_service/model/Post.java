@@ -1,4 +1,4 @@
-package model;
+package com.kwitterbackend.post_service.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -25,6 +25,7 @@ public class Post {
 
     public Post() {
     }
+
 
     public Post(Long userId, String content){
         this.userId = userId;
