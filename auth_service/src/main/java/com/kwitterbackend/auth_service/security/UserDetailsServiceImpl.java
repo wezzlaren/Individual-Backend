@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Service   // It has to be annotated with @Service.
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

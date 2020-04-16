@@ -25,6 +25,7 @@ public class PostController {
     String createPost(@RequestBody NewPostDTO postDTO) {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final String username = (String) auth.getPrincipal();
+        System.out.println("Post created by " + username);
         return postService.createPost(postDTO, username);
     }
 }

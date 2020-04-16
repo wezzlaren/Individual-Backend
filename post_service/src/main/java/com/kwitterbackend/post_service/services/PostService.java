@@ -18,6 +18,6 @@ public class PostService {
 
         Post newPost = new Post(post.getTitle(), post.getContent(), author );
         postRepository.save(newPost);
-        return "kanker post created";
+        return "post created";
     }
 }

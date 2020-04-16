@@ -19,9 +19,8 @@ public class AuthServiceApplication {
     @Configuration
     class RestTemplateConfig {
 
-        // Create a bean for restTemplate to call com.kwitterbackend.post_service.services
         @Bean
-        @LoadBalanced        // Load balance between service instances running at different ports.
+        @LoadBalanced
         public RestTemplate restTemplate() {
             return new RestTemplate();
         }
