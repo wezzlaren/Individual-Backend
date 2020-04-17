@@ -1,4 +1,4 @@
-package com.kwitterbackend.user_service.dto;
+package com.kwitterbackend.post_service.model;
 
 public class UpdateUserEvent {
 

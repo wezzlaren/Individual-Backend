@@ -2,6 +2,7 @@ package com.kwitterbackend.post_service.services;
 
 import com.kwitterbackend.post_service.model.NewPostDTO;
 import com.kwitterbackend.post_service.model.Post;
+import com.kwitterbackend.post_service.model.UpdateUserEvent;
 import com.kwitterbackend.post_service.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,4 +29,5 @@ public class PostService {
     public Iterable<Post> allPosts (){
         return postRepository.findAll();
     }
+
 }
