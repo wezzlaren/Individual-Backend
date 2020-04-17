@@ -20,4 +20,12 @@ public class PostService {
         postRepository.save(newPost);
         return "post created";
     }
+
+    public Iterable<Post> getByAuthor(String author){
+        return postRepository.findPostByAuthor(author);
+    }
+
+    public Iterable<Post> allPosts (){
+        return postRepository.findAll();
+    }
 }
