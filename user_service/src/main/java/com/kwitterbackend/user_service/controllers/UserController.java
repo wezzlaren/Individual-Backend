@@ -4,7 +4,6 @@ package com.kwitterbackend.user_service.controllers;
 import com.google.gson.Gson;
 import com.kwitterbackend.user_service.dto.RegisterDTO;
 import com.kwitterbackend.user_service.dto.UpdateUserEvent;
-import com.kwitterbackend.user_service.dto.UsernameDTO;
 import com.kwitterbackend.user_service.model.User;
 import com.kwitterbackend.user_service.repositories.UserRepository;
 import com.kwitterbackend.user_service.services.UserService;
@@ -34,6 +33,15 @@ public class UserController {
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = RestURIConstant.deleteUser, method = RequestMethod.DELETE)
+    public @ResponseBody String delete() {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = (String) auth.getPrincipal();
+        System.out.println(username);
+        return userService.deleteUser(username);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -71,6 +79,7 @@ public class UserController {
     User current() {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         final String username = (String) auth.getPrincipal();
+
         return userRepository.findByUsername(username);
     }
 

@@ -2,7 +2,6 @@ package com.kwitterbackend.user_service.services;
 
 import com.kwitterbackend.user_service.AuthUtil;
 import com.kwitterbackend.user_service.dto.RegisterDTO;
-import com.kwitterbackend.user_service.dto.UsernameDTO;
 import com.kwitterbackend.user_service.model.User;
 import com.kwitterbackend.user_service.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -47,6 +46,16 @@ public class UserService {
         userRepository.save(user);
         System.out.println("username is now " + newUsername);
         return "Username updated";
+    }
+
+    public String deleteUser(String username){
+        User user = userRepository.findByUsername(username);
+
+        if (userRepository.existsByUsername(username)){
+            userRepository.delete(user);
+            return "Account deleted";
+        }
+        return "Not deleted";
     }
 
 }
