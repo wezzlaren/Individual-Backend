@@ -7,6 +7,7 @@ import com.kwitterbackend.user_service.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static com.kwitterbackend.user_service.security.UserRole.USER;
@@ -19,10 +20,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Iterable<User> allusers (){
@@ -56,6 +59,16 @@ public class UserService {
             return "Account deleted";
         }
         return "Already deleted";
+    }
+
+    public String changePassword(User user, String newPassword){
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        return "Password updated";
+    }
+
+    public boolean checkIfValidOldPassword(User user, String oldPassword){
+        return passwordEncoder.matches(oldPassword, user.getPassword());
     }
 
 }

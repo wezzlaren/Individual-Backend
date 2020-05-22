@@ -10,6 +10,7 @@ import com.kwitterbackend.user_service.services.UserService;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -96,4 +97,20 @@ public class UserController {
         return userService.changeUsername(current(), username);
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = RestURIConstant.changePassword, method = RequestMethod.POST)
+    public @ResponseBody
+    String changePassword(@RequestParam("oldPass") String oldPassword, @RequestParam("newPass") String newPassword) throws Exception {
+        if(!userService.checkIfValidOldPassword(current(), oldPassword)){
+            return "Old password does not match the system";
+        }
+        return userService.changePassword(current(), newPassword);
+    }
+
+    @RequestMapping(value = RestURIConstant.resetPassword, method = RequestMethod.POST)
+    public @ResponseBody
+    String resetPassword(@RequestParam("email") String email){
+        return null;
+    }
+    
 }
