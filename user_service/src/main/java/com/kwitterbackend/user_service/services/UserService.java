@@ -55,7 +55,7 @@ public class UserService {
             userRepository.delete(user);
             return "Account deleted";
         }
-        return "Not deleted";
+        return "Already deleted";
     }
 
 }
