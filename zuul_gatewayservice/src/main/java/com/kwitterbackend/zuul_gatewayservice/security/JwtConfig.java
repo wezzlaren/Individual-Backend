@@ -1,9 +1,8 @@
-package com.kwitterbackend.common.security;
+package com.kwitterbackend.zuul_gatewayservice.security;
 
 import org.springframework.beans.factory.annotation.Value;
 
 public class JwtConfig {
-
     @Value("${security.jwt.uri:/auth/**}")
     private String Uri;
 
@@ -19,7 +18,6 @@ public class JwtConfig {
     @Value("${security.jwt.secret:JwtSecretKey}")
     private String secret;
 
-    // In case you want to use plain getters instead of lombok.
     public String getUri() {
         return Uri;
     }
@@ -41,4 +39,3 @@ public class JwtConfig {
     }
 
 }
-

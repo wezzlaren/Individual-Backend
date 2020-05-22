@@ -1,6 +1,6 @@
 package com.kwitterbackend.zuul_gatewayservice.security;
 
-import com.kwitterbackend.user_service.security.JwtConfig;
+import com.kwitterbackend.zuul_gatewayservice.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtConfig jwtConfig;
-    //TODO: Fix dependencies
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

@@ -1,6 +1,6 @@
 package com.kwitterbackend.zuul_gatewayservice.security;
 
-import com.kwitterbackend.user_service.security.JwtConfig;
+import com.kwitterbackend.zuul_gatewayservice.security.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
