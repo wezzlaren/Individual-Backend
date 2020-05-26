@@ -1,6 +1,6 @@
 package com.kwitterbackend.auth_service.security;
 
-import com.kwitterbackend.user_service.model.User;
+import com.kwitterbackend.auth_service.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
