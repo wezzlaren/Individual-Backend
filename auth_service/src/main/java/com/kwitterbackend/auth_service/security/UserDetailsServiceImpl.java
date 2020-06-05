@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (username.isEmpty()) {
             throw new IllegalArgumentException("username can't be empty");
         }
-        User user = restTemplate.getForObject("http://user-service/UserController/getUser?username=" + username, User.class);
+        User user = restTemplate.getForObject("http://10.0.7.181:9090/UserController/getUser?username=" + username, User.class);
         return user;
     }
 }

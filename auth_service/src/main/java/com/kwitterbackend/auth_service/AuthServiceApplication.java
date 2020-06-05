@@ -20,7 +20,6 @@ public class AuthServiceApplication {
     class RestTemplateConfig {
 
         @Bean
-        @LoadBalanced
         public RestTemplate restTemplate() {
             return new RestTemplate();
         }
