@@ -8,6 +8,7 @@ public class RestURIConstant {
     public static final String currentUser = "/UserController/current";
     public static final String updateUsername = "/UserController/updateUsername";
     public static final String deleteUser = "/UserController/deleteUser";
+    public static final String deleteAsAdmin = "/UserController/delete";
     public static final String changePassword = "/UserController/changePassword";
     public static final String resetPassword = "/UserController/resetPassword";
 }

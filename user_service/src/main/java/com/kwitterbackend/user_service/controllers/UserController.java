@@ -4,6 +4,7 @@ package com.kwitterbackend.user_service.controllers;
 import com.google.gson.Gson;
 import com.kwitterbackend.user_service.dto.RegisterDTO;
 import com.kwitterbackend.user_service.dto.UpdateUserEvent;
+import com.kwitterbackend.user_service.model.DeleteUserEvent;
 import com.kwitterbackend.user_service.model.User;
 import com.kwitterbackend.user_service.repositories.UserRepository;
 import com.kwitterbackend.user_service.services.UserService;
@@ -42,8 +43,19 @@ public class UserController {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = (String) auth.getPrincipal();
         System.out.println(username);
+        DeleteUserEvent deleteUserEvent = new DeleteUserEvent();
+        deleteUserEvent.setUsername(username);
+        rabbitTemplate.convertAndSend(exchange, routingkey, deleteUserEvent);
+        System.out.println("Sent event:" + deleteUserEvent);
         return userService.deleteUser(username);
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value = RestURIConstant.deleteAsAdmin, method = RequestMethod.DELETE)
+    public @ResponseBody String deleteAsAdmin(@RequestBody String username) {
+        return userService.deleteAsAdmin(username);
+    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = RestURIConstant.allUsers, method = RequestMethod.GET)

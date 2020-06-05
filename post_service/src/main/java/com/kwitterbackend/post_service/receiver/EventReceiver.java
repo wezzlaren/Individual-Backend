@@ -1,6 +1,7 @@
 package com.kwitterbackend.post_service.receiver;
 
 import com.google.gson.Gson;
+import com.kwitterbackend.post_service.model.DeleteUserEvent;
 import com.kwitterbackend.post_service.model.Post;
 import com.kwitterbackend.post_service.model.UpdateUserEvent;
 import com.kwitterbackend.post_service.repositories.PostRepository;
@@ -21,8 +22,6 @@ public class EventReceiver {
         System.out.println("received the event!"+ event);
         Gson gson  = new Gson();
         UpdateUserEvent result = gson.fromJson(event, UpdateUserEvent.class);
-        System.out.println(result);
-
         Iterable<Post> posts = postRepository.findPostByAuthor(result.getOldUsername());
         for (Post post : posts) {
             post.setAuthor(result.getNewUsername());
@@ -30,5 +29,19 @@ public class EventReceiver {
         }
         System.out.println("Username updated, author now called " + result.getNewUsername() );
     }
+
+    @RabbitListener(queues = "${kwitter.rabbitmq.queue}")
+    public void receiveDelete(String event) {
+        System.out.println("this user deleted his account:"+ event);
+        Gson gson  = new Gson();
+        DeleteUserEvent result = gson.fromJson(event, DeleteUserEvent.class);
+        Iterable<Post> posts = postRepository.findPostByAuthor(result.getUsername());
+        for (Post post : posts) {
+            postRepository.delete(post);
+            System.out.println("All posts from deleted account" + result.getUsername() + " removed" );
+        }
+    }
+
+
 
 }

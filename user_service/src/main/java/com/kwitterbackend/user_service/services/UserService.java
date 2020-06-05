@@ -60,6 +60,15 @@ public class UserService {
         }
         return "Already deleted";
     }
+    public String deleteAsAdmin(String username) {
+        User user = userRepository.findByUsername(username);
+
+        if (userRepository.existsByUsername(username)){
+            userRepository.delete(user);
+            return "Account deleted";
+        }
+        return "Already deleted";
+    }
 
     public String changePassword(User user, String newPassword){
         user.setPassword(passwordEncoder.encode(newPassword));

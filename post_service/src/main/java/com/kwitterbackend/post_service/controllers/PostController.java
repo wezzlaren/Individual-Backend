@@ -29,6 +29,15 @@ public class PostController {
     }
 
     @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = RestURIConstant.deletePost, method = RequestMethod.DELETE)
+    public @ResponseBody String deletePost() {
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = (String) auth.getPrincipal();
+        System.out.println(username);
+        return postService.deletePost(username);
+    }
+
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping( value = RestURIConstant.getPostByAuthor, method = RequestMethod.GET)
     public @ResponseBody
     Iterable<Post> getPostByAuthor(@RequestParam("author") String author){

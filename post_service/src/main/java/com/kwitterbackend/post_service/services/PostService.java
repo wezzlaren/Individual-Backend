@@ -22,6 +22,15 @@ public class PostService {
         return "post created";
     }
 
+    public String deletePost(String username){
+        Post post = (Post) postRepository.findPostByAuthor(username);
+        if (postRepository.existsByAuthor(username)){
+            postRepository.delete(post);
+            return "Post deleted";
+        }
+        return "Post is already deleted";
+    }
+
     public Iterable<Post> getByAuthor(String author){
         return postRepository.findPostByAuthor(author);
     }

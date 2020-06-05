@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface PostRepository extends CrudRepository<Post, Long> {
     Post findPostById(Long id);
     Iterable<Post> findPostByAuthor(String author);
+
+    Boolean existsByAuthor(String username);
 }
