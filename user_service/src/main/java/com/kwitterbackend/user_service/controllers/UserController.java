@@ -52,7 +52,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = RestURIConstant.deleteAsAdmin, method = RequestMethod.DELETE)
-    public @ResponseBody String deleteAsAdmin(@RequestBody String username) {
+    public @ResponseBody String deleteAsAdmin(@RequestParam("username") String username) {
         return userService.deleteAsAdmin(username);
     }
 
