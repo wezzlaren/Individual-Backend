@@ -28,6 +28,8 @@ public class UserController {
     private String exchange;
     @Value("${kwitter.rabbitmq.routingkey}")
     private String routingkey;
+    @Value("${kwitter.rabbitmq.routingkeydelete}")
+    private String routingkeyDelete;
 
     private final UserService userService;
     private final UserRepository userRepository;
@@ -45,7 +47,7 @@ public class UserController {
         System.out.println(username);
         DeleteUserEvent deleteUserEvent = new DeleteUserEvent();
         deleteUserEvent.setUsername(username);
-        rabbitTemplate.convertAndSend(exchange, routingkey, deleteUserEvent);
+        rabbitTemplate.convertAndSend(exchange, routingkeyDelete, deleteUserEvent);
         System.out.println("Sent event:" + deleteUserEvent);
         return userService.deleteUser(username);
     }
@@ -53,6 +55,10 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = RestURIConstant.deleteAsAdmin, method = RequestMethod.DELETE)
     public @ResponseBody String deleteAsAdmin(@RequestParam("username") String username) {
+        DeleteUserEvent deleteUserEvent = new DeleteUserEvent();
+        deleteUserEvent.setUsername(username);
+        rabbitTemplate.convertAndSend(exchange, routingkeyDelete, deleteUserEvent);
+        System.out.println("Sent event:" + deleteUserEvent);
         return userService.deleteAsAdmin(username);
     }
 

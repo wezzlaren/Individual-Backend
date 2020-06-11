@@ -30,7 +30,7 @@ public class EventReceiver {
         System.out.println("Username updated, author now called " + result.getNewUsername() );
     }
 
-    @RabbitListener(queues = "${kwitter.rabbitmq.queue}")
+    @RabbitListener(queues = "${kwitter.rabbitmq.queuedelete}")
     public void receiveDelete(String event) {
         System.out.println("this user deleted his account:"+ event);
         Gson gson  = new Gson();

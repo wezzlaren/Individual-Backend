@@ -14,15 +14,24 @@ public class MessageBrokerConfiguration {
 
     @Value("${kwitter.rabbitmq.queue}")
     private String queueName;
+
+    @Value("${kwitter.rabbitmq.queuedelete}")
+    private String queueDelete;
+
     @Value("${kwitter.rabbitmq.exchange}")
     private String exchange;
     @Value("${kwitter.rabbitmq.routingkey}")
     private String routingKey;
+    @Value("${kwitter.rabbitmq.routingkeydelete}")
+    private String routingKeyDelete;
 
     @Bean
     public Queue queue() {
         return new Queue(queueName);
     }
+
+    @Bean
+    public Queue queueDelete() {return new Queue(queueDelete);}
 
     @Bean
     public DirectExchange exchange() {
@@ -32,5 +41,10 @@ public class MessageBrokerConfiguration {
     @Bean
     Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(routingKey);
+    }
+
+    @Bean
+    Binding bindingDelete(Queue queueDelete, DirectExchange exchange) {
+        return BindingBuilder.bind(queueDelete).to(exchange).with(routingKeyDelete);
     }
 }
